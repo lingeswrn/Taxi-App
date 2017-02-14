@@ -60,3 +60,10 @@ body {
 #bottomNav a:hover {
     color:#fff;
 }
+
+#toaster {  
+  top: 5px;
+  height: 48px;
+  left: 0;
+  width: 100%;
+}
