@@ -1,0 +1,100 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/angular-material.min.css">  
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body ng-app="BlankApp" ng-cloak>
+
+
+	<div ng-controller="loginCtrl" layout="column" ng-cloak="" class="registrationForm">
+	<md-grid-list md-cols="4" md-row-height="fit" style="height: 60px;">
+  <md-grid-tile></md-grid-tile>
+</md-grid-list>
+  <md-content layout-padding="">
+	<md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
+    <form name="registrationForm">
+
+      
+      <md-input-container class="md-block">
+        <label>Name</label>
+        <input required="" type="text" name="username" ng-model="login.username" minlength="2">
+
+        <div ng-messages="registrationForm.username.$error" role="alert">
+          <div ng-message-exp="['minlength']">
+			Invalid Name.
+          </div>
+		  <div ng-message-exp="['required']">
+			This fiels is required.
+          </div>
+        </div>
+      </md-input-container>
+	  
+      
+      <md-input-container class="md-block">
+        <label>Phone Number</label>
+        <input required="" type="text" name="phone" ng-model="login.phone" minlength="2">
+
+        <div ng-messages="registrationForm.phone.$error" role="alert">
+          <div ng-message-exp="['minlength']">
+			Invalid Name.
+          </div>
+		  <div ng-message-exp="['required']">
+			This fiels is required.
+          </div>
+        </div>
+      </md-input-container>
+	  
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <input required="" type="email" name="emailId" ng-model="login.emailId" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/">
+
+        <div ng-messages="registrationForm.emailId.$error" role="alert">
+          <div ng-message-exp="['minlength', 'maxlength', 'pattern']">
+			Invalid Email ID.
+          </div>
+		  <div ng-message-exp="['required']">
+            This fiels is required.
+          </div>
+        </div>
+      </md-input-container>
+	  
+      <md-input-container class="md-block">
+        <label>Password</label>
+        <input required="" type="password" name="password" ng-model="login.password" autocomplete="off">
+
+        <div ng-messages="registrationForm.password.$error" role="alert">
+          <div ng-message-exp="['required']">
+            This fiels is required.
+          </div>
+        </div>
+      </md-input-container>
+
+      <div>
+        <md-button ng-disabled="!registrationForm.$valid" ng-click="registrationForm.submit()" class="md-raised md-primary">&nbsp Sign Up &nbsp</md-button>
+      </div>
+
+    </form>
+	</md-card>
+  </md-content>
+
+</div>
+
+</div>
+  
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="../js/angular.min.js"></script>
+  <script src="../js/angular-animate.min.js"></script>
+  <script src="../js/angular-aria.min.js"></script>
+  <script src="../js/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="../js/angular-material.min.js"></script>
+  
+  <!-- Controllers -->
+  <script src="../controllers/app.js"></script>
+  
+</body>
+</html>

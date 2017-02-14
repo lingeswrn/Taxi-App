@@ -1,62 +1,9 @@
-<html lang="en" >
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Angular Material style sheet -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/angular-material.min.css">  
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body ng-app="BlankApp" ng-cloak>
-  <div id="wrap">
-  
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="navbar-header text-center">
-        <a href="#" class="navbar-brand">Brand</a> 
-      </div>
-    </nav>
-  
-  <!-- Begin page content -->
-  <div class="container">
-    <div class="page-header">
-      <h1>Mobile Layout</h1>
-    </div>
-    <p class="lead">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
-    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
-    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores 
-    eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
-    sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
-    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-    </p>
-  </div>
-</div>
-
-<div id="footer">
-  <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
-  <div class="row" id="bottomNav">
-    <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-left"></i><br>Link</a></div>
-    <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-down"></i><br>Link</a></div>
-    <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div>
-  </div>
-  </div>
-</div>
-  
-  
-  <!-- Angular Material requires Angular.js Libraries -->
-  <script src="js/angular.min.js"></script>
-  <script src="js/angular-animate.min.js"></script>
-  <script src="js/angular-aria.min.js"></script>
-  <script src="js/angular-messages.min.js"></script>
-
-  <!-- Angular Material Library -->
-  <script src="js/angular-material.min.js"></script>
-  
-  <!-- Your application bootstrap  -->
-  <script type="text/javascript"> 
-    /**
-     * You must include the dependency on 'ngMaterial' 
-     */
-    angular.module('BlankApp', ['ngMaterial']);
-  </script>
-  
-</body>
-</html>
+<script>
+	var session = sessionStorage.getItem( 'userData' );
+	console.log( session );
+	if( session === null ){
+		location.href = "pages/login.html";
+	}else{
+		location.href = "pages/booking.html";
+	}
+</script>
