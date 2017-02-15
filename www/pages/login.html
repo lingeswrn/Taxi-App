@@ -20,7 +20,7 @@
       
       <md-input-container class="md-block">
         <label>Email</label>
-        <input required="" type="email" name="emailId" ng-model="login.emailId" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/">
+        <input required="" type="email" name="emailId" ng-model="login.email_id" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/">
 
         <div ng-messages="loginForm.emailId.$error" role="alert">
           <div ng-message-exp="['minlength', 'maxlength', 'pattern']">
@@ -43,8 +43,9 @@
         </div>
       </md-input-container>
 
-      <div>
-        <md-button ng-disabled="!loginForm.$valid" ng-click="loginForm.submit()" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
+      <div layout="column">
+        <md-button ng-disabled="!loginForm.$valid" ng-click="loginFormsubmit(login)" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
+        <md-button class="md-raised md-primary" onclick="return location.href='registration.html'">&nbsp Signup &nbsp</md-button>
       </div>
 
     </form>

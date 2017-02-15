@@ -3,7 +3,8 @@ var app = 	angular.module('BlankApp', ['ngMaterial','ngAnimate','ngAria','ngMess
 /* CONSTANTS */
 app.service( 'Constants', function(){
 	this.apiUrl = function(){
-		return "http://budjet.000webhostapp.com/API/";
+		//return "http://budjet.000webhostapp.com/API/";
+		return "http://localhost/taxi_api/API/";
 	};
 });
 
@@ -25,8 +26,20 @@ app.factory( 'Toast', function( $mdToast ){
 });
 
 /* LOGIN CONTROLLER */
-app.controller( 'loginCtrl' , function( $scope, $log, $http ){
+app.controller( 'loginCtrl' , function( $scope, $log, $http, $mdToast, Constants, Toast ){
+	var API_URL = Constants.apiUrl();
 	
+	$scope.loginFormsubmit = function( login ){		
+		$http.post( API_URL + 'login.php',{ data: login} ).success( function( response ){
+			if( response.code == 400 ){
+				Toast.common( response.message, 'error' );
+			}else if( response.code == 200 ){
+				sessionStorage.setItem( 'userData',  JSON.stringify(response.data) );
+				location.href = "booking.html";
+				console.log( sessionStorage.getItem('userData') )
+			}
+		});
+	};
 });
 
 /* REGISTRATION CONTROLLER */
@@ -38,7 +51,6 @@ app.controller( 'registrationCtrl' , function( $scope, $log, $http, $mdToast, Co
 			if( response.code == 400 ){
 				Toast.common( response.message, 'error' );
 			}else if( response.code == 200 ){
-				$scope.registration.name = "";
 				Toast.common( response.message, 'success' );
 			}
 		});

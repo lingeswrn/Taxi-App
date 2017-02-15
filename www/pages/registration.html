@@ -71,8 +71,9 @@
         </div>
       </md-input-container>
 
-      <div>
-        <md-button ng-disabled="!registrationForm.$valid" ng-click="registrationFormSubmit( registration )" class="md-raised md-primary">&nbsp Sign Up &nbsp</md-button>
+      <div layout="column">
+        <md-button ng-disabled="!registrationForm.$valid" ng-click="registrationFormSubmit(registration)" class="md-raised md-primary">&nbsp Sign Up &nbsp</md-button>
+        <md-button class="md-raised md-primary" onclick="return location.href='login.html'">&nbsp Login &nbsp</md-button>
       </div>
 
     </form>
