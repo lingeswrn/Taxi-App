@@ -61,9 +61,22 @@ body {
     color:#fff;
 }
 
-#toaster {  
-  top: 5px;
-  height: 48px;
+#toaster { 
+  /* height: 48px; */
   left: 0;
   width: 100%;
+}
+
+md-toast.md-success-toast-theme .md-toast-content {
+    background-color: green;
+}
+
+md-toast.md-error-toast-theme .md-toast-content {
+    background-color: #F08080;
+}
+
+md-toast {
+    left: 7!important;
+    width: 96%!important;
+    top: 59!important;
 }
