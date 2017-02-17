@@ -7,35 +7,65 @@
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body ng-app="BlankApp" ng-cloak>
-  <div id="wrap">
+	<div id="wrap" ng-controller="bookingCtrl">
   
     <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header text-center">
-        <a href="#" class="navbar-brand">Brand</a> 
+        <span class="navbar-brand pull-left">Book Your Ride</span> 
+        <span class="navbar-brand pull-right"><i class="glyphicon glyphicon-off"></i></span> 
       </div>
     </nav>
-  
+	<md-content layout-padding="">
+	<md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
+    <form name="bookingForm">
+
+      
+      <md-input-container class="md-block">
+        <label>Form</label>
+        <input required="" type="text" name="from" ng-model="booking.from" id="autocompleteFrom">
+
+        <div ng-messages="bookingForm.from.$error" role="alert">
+		  <div ng-message-exp="['required']">
+			 This field is required.
+          </div>
+        </div>
+      </md-input-container>
+	  
+      <md-input-container class="md-block">
+        <label>To</label>
+        <input required="" type="text" name="to" ng-model="booking.to" id="autocompleteTo">
+
+        <div ng-messages="bookingForm.to.$error" role="alert">
+          <div ng-message-exp="['required']">
+            This fiels is required.
+          </div>
+        </div>
+      </md-input-container>
+
+      <div layout="column">
+        <md-button ng-disabled="!bookingForm.$valid" ng-click="bookingFormsubmit(booking)" class="md-raised md-primary">&nbsp Confirm Ride &nbsp</md-button>
+      </div>
+
+    </form>
+	</md-card>
+  </md-content>
   <!-- Begin page content -->
   <div class="container">
-    <div class="page-header">
-      <h1>Mobile Layout</h1>
-    </div>
-    <p class="lead">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
-    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae 
-    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia cor magni dolores 
-    eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, 
-    sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
-    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-    </p>
+    <div class="row">
+		<div class="col-xs-12">
+			
+		</div>
+		<div class="col-xs-12"></div>
+	</div>
   </div>
 </div>
 
 <div id="footer">
   <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
   <div class="row" id="bottomNav">
+	<div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-plane"></i></a></div>
     <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-road"></i></a></div>
-    <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-user"></i></a></div>
-    <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-plane"></i></a></div>
+    <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-user"></i></a></div>    
   </div>
   </div>
 </div>
@@ -50,13 +80,9 @@
   <!-- Angular Material Library -->
   <script src="../js/angular-material.min.js"></script>
   
-  <!-- Your application bootstrap  -->
-  <script type="text/javascript"> 
-    /**
-     * You must include the dependency on 'ngMaterial' 
-     */
-    angular.module('BlankApp', ['ngMaterial']);
-  </script>
+  <!-- Controllers -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDElubjsDGr0TcRnLVbi4JRvxxH1akfV2M&libraries=places"></script>
+  <script src="../controllers/app.js"></script>
   
 </body>
 </html>
