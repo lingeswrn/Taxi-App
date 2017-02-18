@@ -5,8 +5,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/angular-material.min.css">  
   <link rel="stylesheet" href="../css/style.css">
+  
 </head>
-<body ng-app="BlankApp" ng-cloak>
+<body ng-app="BlankApp" ng-cloak disable-tap>
 	<div id="wrap" ng-controller="bookingCtrl">
   
     <nav class="navbar navbar-default" role="navigation">
@@ -22,7 +23,7 @@
       
       <md-input-container class="md-block">
         <label>Form</label>
-        <input required="" type="text" name="from" ng-model="booking.from" id="autocompleteFrom">
+        <input required="" type="text" name="from" ng-model="booking.from" id="autocomplete">
 
         <div ng-messages="bookingForm.from.$error" role="alert">
 		  <div ng-message-exp="['required']">
@@ -33,7 +34,7 @@
 	  
       <md-input-container class="md-block">
         <label>To</label>
-        <input required="" type="text" name="to" ng-model="booking.to" id="autocompleteTo">
+        <input required="" type="text" name="to" ng-model="booking.to" ng-autocomplete>
 
         <div ng-messages="bookingForm.to.$error" role="alert">
           <div ng-message-exp="['required']">
@@ -49,15 +50,6 @@
     </form>
 	</md-card>
   </md-content>
-  <!-- Begin page content -->
-  <div class="container">
-    <div class="row">
-		<div class="col-xs-12">
-			
-		</div>
-		<div class="col-xs-12"></div>
-	</div>
-  </div>
 </div>
 
 <div id="footer">
@@ -76,12 +68,15 @@
   <script src="../js/angular-animate.min.js"></script>
   <script src="../js/angular-aria.min.js"></script>
   <script src="../js/angular-messages.min.js"></script>
-
+	<script src="../js/ngautocomplete.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <!-- Angular Material Library -->
   <script src="../js/angular-material.min.js"></script>
   
+  
   <!-- Controllers -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDElubjsDGr0TcRnLVbi4JRvxxH1akfV2M&libraries=places"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
   <script src="../controllers/app.js"></script>
   
 </body>

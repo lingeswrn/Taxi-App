@@ -1,4 +1,4 @@
-var app = 	angular.module('BlankApp', ['ngMaterial','ngAnimate','ngAria','ngMessages']);
+var app = 	angular.module('BlankApp', ['ngMaterial','ngAnimate','ngAria','ngMessages','ngAutocomplete']);
 
 /* CONSTANTS */
 app.service( 'Constants', function(){
@@ -7,6 +7,29 @@ app.service( 'Constants', function(){
 		//return "http://localhost/taxi_api/API/";
 	};
 });
+
+/*GOOGLE TAB DIRECTIVE */
+app.directive('disableTap', function($timeout) {
+  return {
+    link: function() {
+      $timeout(function() {
+        // Find google places div
+        _.findIndex(angular.element(document.querySelectorAll('.pac-container')), function(container) {
+          // disable ionic data tab
+          container.setAttribute('data-tap-disabled', 'true');
+          // leave input field if google-address-entry is selected
+          container.onclick = function( e ) {
+			  console.log(e)
+			  console.log(e.srcElement.parentNode.textContent)
+            document.getElementById('autocomplete').blur();
+			
+          };
+        });
+      },500);
+    }
+  };
+});
+
 
 /* TOAST */
 app.factory( 'Toast', function( $mdToast ){
@@ -59,7 +82,7 @@ app.controller( 'registrationCtrl' , function( $scope, $log, $http, $mdToast, Co
 
 /* BOOKING CONTROLLER */
 app.controller( 'bookingCtrl' , function( $scope, $log, $http, $mdToast, Constants, Toast ){
-	var placeSearch, autocomplete;
+	/* var placeSearch, autocomplete;
       var componentForm = {
         street_number: 'short_name',
         route: 'long_name',
@@ -72,8 +95,8 @@ app.controller( 'bookingCtrl' , function( $scope, $log, $http, $mdToast, Constan
       function initAutocomplete() {
         // Create the autocomplete object, restricting the search to geographical
         // location types.
-        autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocompleteFrom')),{types: ['geocode']});
-        autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocompleteTo')),{types: ['geocode']});
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
+        //autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocompleteTo')),{types: ['geocode']});
 
         // When the user selects an address from the dropdown, populate the address
         // fields in the form.
@@ -100,6 +123,31 @@ app.controller( 'bookingCtrl' , function( $scope, $log, $http, $mdToast, Constan
             autocomplete.setBounds(circle.getBounds());
           });
         }
-      }
-	 initAutocomplete();
+      } */
+	  
+	  function initAutocomplete() {
+  const googleComponents = [
+    { googleComponent: 'sublocality_level_1', id: 'city-address-field' },
+    { googleComponent: 'locality', id: 'city-address-field' },
+    { googleComponent: 'administrative_area_level_1', id: 'state-address-field' },
+    { googleComponent: 'postal_code', id: 'postal-code-address-field' },
+  ];
+  const autocompleteFormField = document.getElementById('autocomplete');
+  const autocomplete = new google.maps.places.Autocomplete((autocompleteFormField), {
+    types: ['address'],
+    componentRestrictions: ['in'],
+  });
+  google.maps.event.clearInstanceListeners(autocompleteFormField);
+  google.maps.event.addListener(autocomplete, 'place_changed', function(){
+    const place = autocomplete.getPlace();
+	console.log(place)
+    /* autocompleteFormField.value = place.name;
+    for (const component in googleComponents) {
+      const addressComponents = place.address_components;
+      addressComponents.forEach( addressComponent => populateFormElements(addressComponent, googleComponents[component]));
+    } */
+  });
+}
+
+	 initAutocomplete(); 
 });
