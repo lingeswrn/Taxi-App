@@ -2,13 +2,15 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/angular-material.min.css">  
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/angular-toastr.min.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/autocomplete.css">
+  <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css">
   
 </head>
-<body ng-app="BlankApp" ng-cloak disable-tap>
-	<div id="wrap" ng-controller="bookingCtrl">
+<body ng-app="BlankApp" ng-cloak>
+	<div id="wrap" ng-controller="bookingCtrl" class="bookingForm">
   
     <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header text-center">
@@ -16,68 +18,107 @@
         <span class="navbar-brand pull-right"><i class="glyphicon glyphicon-off"></i></span> 
       </div>
     </nav>
-	<md-content layout-padding="">
-	<md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
-    <form name="bookingForm">
+	<div class="wrapper">
+		<div class="col-xs-12 ">
+			<form name="bookingForm" class="form-booking form-success hide">
+				<div class="form-group">
+					<label>From</label>
+					<input required="" type="text" name="from" ng-model="booking.from" class="form-control" g-places-autocomplete options="autocompleteOptions">
+					<div ng-messages="bookingForm.from.$error" role="alert" ng-if="bookingForm.from.$dirty" class="error">
+					  <div ng-message-exp="['required']">
+						 This field is required.
+					  </div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>To</label>
+					<input required="" type="text" name="to" ng-model="booking.to" class="form-control" g-places-autocomplete options="autocompleteOptions">
 
-      
-      <md-input-container class="md-block">
-        <label>Form</label>
-        <input required="" type="text" name="from" ng-model="booking.from" id="autocomplete">
-
-        <div ng-messages="bookingForm.from.$error" role="alert">
-		  <div ng-message-exp="['required']">
-			 This field is required.
-          </div>
-        </div>
-      </md-input-container>
-	  
-      <md-input-container class="md-block">
-        <label>To</label>
-        <input required="" type="text" name="to" ng-model="booking.to" ng-autocomplete>
-
-        <div ng-messages="bookingForm.to.$error" role="alert">
-          <div ng-message-exp="['required']">
-            This fiels is required.
-          </div>
-        </div>
-      </md-input-container>
-
-      <div layout="column">
-        <md-button ng-disabled="!bookingForm.$valid" ng-click="bookingFormsubmit(booking)" class="md-raised md-primary">&nbsp Confirm Ride &nbsp</md-button>
-      </div>
-
-    </form>
-	</md-card>
-  </md-content>
+					<div ng-messages="bookingForm.to.$error" role="alert" ng-if="bookingForm.to.$dirty" class="error">
+					  <div ng-message-exp="['required']">
+						This fiels is required.
+					  </div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Ride date and Time</label>
+					<input type="text" name="date" ng-model="booking.date" class="form-control" id="basic_example_1">
+					
+					<div ng-messages="bookingForm.date.$error" role="alert" ng-if="bookingForm.date.$dirty" class="error">
+					  <div ng-message-exp="['required']">
+						This fiels is required.
+					  </div>
+					</div>
+				</div>
+				<div>
+					<input type="button" ng-disabled="!bookingForm.$valid || booking.date == ''" ng-click="bookingFormsubmit(booking)" class="btn btn-success btn-block" value="Get Ride">
+				</div>
+			</form>
+			<form class="form-booking form-pending hide text-center">
+				<h4>Already You have pending ride or on ride.</h4>
+				<h4>To manage the rides <a href="rides.html">Click Here</a></h4>
+			</form>
+		</div>
+	</div>
+	<div id="confirm-popup" class="fin-modal" style="display: none;">
+		<span class="finish-close" data-dismiss="modal">×</span>
+		
+		<div class="confirm-popup acpt-chllng-popup">
+			<label>Ride From:</label> <br>
+			{{ booking.from.formatted_address }}
+			<hr>
+			<label>Ride To:</label> <br>
+			{{ booking.to.formatted_address }}
+			<hr>
+			<label>Ride Date:</label> <br>
+			{{ booking.date }}
+			<hr>
+			<label>Total Kms:</label> <br>
+			{{ booking.distance }}
+			<hr>
+			<label>Travel Duration:</label> <br>
+			{{ booking.duration }}
+			<hr>
+			
+			<button class="btn btn-success btn-block" ng-click="confirmRide()">Confirm Ride</button>
+		</div>
+	</div>
+	
+	<div id="success-popup" class="fin-modal" style="display: none;">
+		<span class="finish-close" data-dismiss="modal">×</span>
+		
+		<div class="confirm-popup acpt-chllng-popup text-center">
+			<h4>Your Ride is on Queue. Our driver will contact you soon.</h4>
+		</div>
+	</div>
+	
 </div>
 
 <div id="footer">
   <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
   <div class="row" id="bottomNav">
-	<div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-plane"></i></a></div>
-    <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-road"></i></a></div>
-    <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-user"></i></a></div>    
+	<div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-plane"></i><br><span class="nav-font">Book Ride</span></a></div>
+    <div class="col-xs-4 text-center"><a href="rides.html"><i class="glyphicon glyphicon-road"></i><br><span class="nav-font">Rides</span></a></div>
+    <div class="col-xs-4 text-center"><a href="profile.html"><i class="glyphicon glyphicon-user"></i><br><span class="nav-font">Profile</span></a></div>    
   </div>
   </div>
 </div>
   
+
   
-  <!-- Angular Material requires Angular.js Libraries -->
   <script src="../js/angular.min.js"></script>
-  <script src="../js/angular-animate.min.js"></script>
-  <script src="../js/angular-aria.min.js"></script>
   <script src="../js/angular-messages.min.js"></script>
-	<script src="../js/ngautocomplete.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <!-- Angular Material Library -->
-  <script src="../js/angular-material.min.js"></script>
-  
+  <script src="../js/angular-animate.min.js"></script>
+  <script src="../js/angular-toastr.tpls.min.js"></script>
+  <script src="../js/autocomplete.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/jquery-ui.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/bootstrap-datetimepicker.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDElubjsDGr0TcRnLVbi4JRvxxH1akfV2M&libraries=places"></script>
   
   <!-- Controllers -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDElubjsDGr0TcRnLVbi4JRvxxH1akfV2M&libraries=places"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
   <script src="../controllers/app.js"></script>
-  
 </body>
 </html>
+

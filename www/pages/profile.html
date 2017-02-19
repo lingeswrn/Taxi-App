@@ -1,0 +1,88 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/angular-toastr.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  
+</head>
+<body ng-app="BlankApp" ng-cloak>
+	<div id="wrap" ng-controller="profileCtrl" class="profileForm">
+  
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header text-center">
+        <span class="navbar-brand pull-left">My Profile</span> 
+        <span class="navbar-brand pull-right"><i class="glyphicon glyphicon-off"></i></span> 
+      </div>
+    </nav>
+	<div class="wrapper">
+		<div class="col-xs-12 ">
+			<form name="profileForm" class="form-profile">
+				<div class="form-group">
+					<label>Name</label>
+					<input required="" type="text" name="name" ng-model="profile.name" class="form-control">
+					<div ng-messages="profileForm.name.$error" role="alert" ng-if="profileForm.name.$dirty" class="error">
+					  <div ng-message-exp="['required']">
+						 This field is required.
+					  </div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Phone Number</label>
+					<input required="" type="text" name="phone" ng-model="profile.phone" minlength="10"  maxlength="10" class="form-control" numbers-only>
+					<div ng-messages="profileForm.phone.$error" role="alert" ng-if="profileForm.phone.$dirty">
+					  <div ng-message-exp="['minlength', 'maxlength']" class="error">
+						Invalid Phone Number.
+					  </div>
+					  <div ng-message-exp="['required']" class="error">
+						This fiels is required.
+					  </div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Email</label>
+					<input required="" type="email" name="emailId" ng-model="profile.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" class="form-control" disabled>					
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" name="password" ng-model="profile.password" class="form-control">
+					<div ng-messages="profileForm.password.$error" role="alert" ng-if="profileForm.password.$dirty">					
+					  <div ng-message-exp="['required']" class="error">
+						This fiels is required.
+					  </div>
+					</div>
+				</div>
+				<div>
+					<input type="button" ng-disabled="!profileForm.$valid" ng-click="profileFormsubmit(profile)" class="btn btn-success btn-block" value="Update">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="footer">
+  <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+  <div class="row" id="bottomNav">
+	<div class="col-xs-4 text-center"><a href="booking.html"><i class="glyphicon glyphicon-plane"></i><br><span class="nav-font">Book Ride</span></a></div>
+    <div class="col-xs-4 text-center"><a href="rides.html"><i class="glyphicon glyphicon-road"></i><br><span class="nav-font">Rides</span></a></div>
+    <div class="col-xs-4 text-center"><a href="#"><i class="glyphicon glyphicon-user"></i><br><span class="nav-font">Profile</span></a></div>    
+  </div>
+  </div>
+</div>
+  
+
+  
+  <script src="../js/angular.min.js"></script>
+  <script src="../js/angular-messages.min.js"></script>
+  <script src="../js/angular-animate.min.js"></script>
+  <script src="../js/angular-toastr.tpls.min.js"></script>
+  <script src="../js/autocomplete.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  
+  <!-- Controllers -->
+  <script src="../controllers/app.js"></script>
+</body>
+</html>
+
