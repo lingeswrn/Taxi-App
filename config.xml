@@ -2,11 +2,12 @@
 <widget id="com.threedots.taxi" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Taxi App</name>
     <description>
-        A blank PhoneGap app.
+        Easily can find nearest Taxi
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="lingeswrn@gmail.com" href="http://threedots-info.asia">
+        Three Dots Information technology
     </author>
+    <icon src="res/android/icon.png" platform="android" width="57" height="57" density="mdpi" />
     <content src="index.html" />
     <access origin="*" />
 </widget>

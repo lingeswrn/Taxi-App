@@ -3,8 +3,8 @@ var app = 	angular.module('BlankApp', ['ngMessages','toastr','ngAnimate','google
 /* CONSTANTS */
 app.service( 'Constants', function(){
 	this.apiUrl = function(){
-		//return "http://budjet.000webhostapp.com/API/";
-		return "http://localhost/taxi/PHP/API/";
+		return "http://budjet.000webhostapp.com/API/";
+		//return "http://localhost/taxi/PHP/API/";
 	};
 	
 	this.userId = function(){
